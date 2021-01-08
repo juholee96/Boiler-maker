@@ -1,31 +1,29 @@
-"use strict";
-
-const { resolve } = require("path");
+const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
-  entry: ["babel-polyfill", "./app/main"],
+  mode: isDev ? 'development' : 'production',
+  entry: [
+    '@babel/polyfill', // enables async-await
+    './client/index.js'
+  ],
   output: {
     path: __dirname,
-    filename: "./public/bundle.js",
+    filename: './public/bundle.js'
   },
-  mode: "development",
-  context: __dirname,
-  devtool: "source-map",
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: ['.js', '.jsx']
+  },
+  devtool: 'source-map',
+  watchOptions: {
+    ignored: /node_modules/
   },
   module: {
     rules: [
       {
-        test: /jsx?$/,
-        exclude: /(node_modules|bower_components)/,
-        include: resolve(__dirname, "./app"),
-        loader: "babel-loader",
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
-      },
-    ],
-  },
-};
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      }
+    ]
+  }
+}

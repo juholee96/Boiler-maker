@@ -1,17 +1,7 @@
-# Ignore all node_modules
-node_modules/*
-
-# Compiled JS
-bundle.js
-bundle.js.map
-
-# NPM errors
+node_modules
+public/bundle.js
+public/bundle.js.map
+secrets.js
+.DS_Store
 npm-debug.log
-
-# OSX
-.DS_Store
-
-# Vim stuff
-*.swp
-
-.DS_Store
+yarn-error.log
